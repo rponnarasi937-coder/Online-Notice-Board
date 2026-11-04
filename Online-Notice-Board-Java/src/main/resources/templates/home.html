@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Campus Notice Board</title><link rel="stylesheet" th:href="@{/style.css}"></head>
+<body><header><div class="brand">📌 Campus Notice Board</div><nav>
+<a href="/">Home</a><span th:if="${username == null}"><a href="/login">Login</a></span>
+<span th:if="${username != null}"><b th:text="${username}"></b> <a href="/logout">Logout</a></span></nav></header>
+<main><section class="hero"><div><p class="eyebrow">CAMPUS UPDATES, ALL IN ONE PLACE</p><h1>Stay informed.<br><span>Stay connected.</span></h1>
+<p>Find the latest college announcements, events, exam updates and important information.</p>
+<div th:if="${role == 'ADMIN' or role == 'FACULTY'}"><a class="button" href="/notices/new">＋ Post a Notice</a></div></div>
+<div class="hero-icon">📣</div></section>
+<form class="search" method="get" action="/"><input name="q" th:value="${q}" placeholder="Search notices by title or content..."><button>Search</button></form>
+<div class="section-heading"><div><p class="eyebrow">LATEST UPDATES</p><h2>Notice Board</h2></div><span class="count" th:text="${notices.size()} + ' notices'"></span></div>
+<div class="notice-grid" th:if="${!notices.isEmpty()}">
+<article class="notice-card" th:each="n : ${notices}">
+<div class="card-top"><span class="category" th:text="${n.category}"></span><span class="important" th:if="${n.important}">★ IMPORTANT</span></div>
+<h3 th:text="${n.title}"></h3><p class="notice-content" th:text="${n.content}"></p>
+<div class="meta"><span>Posted by <b th:text="${n.postedBy}"></b></span><span th:text="${n.postedDate}"></span></div>
+<div class="expiry" th:if="${n.expiryDate != null}">Valid until: <span th:text="${n.expiryDate}"></span></div>
+<div class="actions" th:if="${role == 'ADMIN' or role == 'FACULTY'}"><a th:href="@{'/notices/edit/' + ${n.id}}">Edit</a>
+<form th:if="${role == 'ADMIN'}" th:action="@{'/notices/delete/' + ${n.id}}" method="post"><button class="delete">Delete</button></form></div>
+</article></div>
+<div class="empty" th:if="${notices.isEmpty()}"><div>📭</div><h3>No notices found</h3><p>Try another search or check again later.</p></div>
+</main><footer>© 2026 Campus Notice Board · College Communication Portal</footer></body></html>

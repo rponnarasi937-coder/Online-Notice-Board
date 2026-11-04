@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Post Notice - Campus Notice Board</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+
+<header>
+    <div class="brand">📌 Campus Notice Board</div>
+    <a href="/">Home</a>
+</header>
+
+<main class="form-wrap">
+    <div class="form-card">
+        <h2>Post a Notice</h2>
+
+        <form th:object="${notice}"
+              th:action="${notice.id == null ? '/notices' : '/notices/' + notice.id}"
+              method="post">
+
+            <label>Notice Title</label>
+            <input type="text" th:field="*{title}"
+                   placeholder="Enter notice title" required>
+
+            <label>Category</label>
+            <select th:field="*{category}" required>
+                <option value="">Select Category</option>
+                <option value="General">General</option>
+                <option value="Event">Event</option>
+                <option value="Exam">Exam</option>
+                <option value="Placement">Placement</option>
+                <option value="Sports">Sports</option>
+            </select>
+
+            <label>Notice Details</label>
+            <textarea th:field="*{content}"
+                      placeholder="Enter notice details"
+                      rows="5" required></textarea>
+
+            <label>Expiry Date</label>
+            <input type="date" th:field="*{expiryDate}">
+
+            <label class="check">
+                <input type="checkbox" th:field="*{important}">
+                Important Notice
+            </label>
+
+            <button type="submit" class="button">Save Notice</button>
+            <a href="/" class="cancel">Cancel</a>
+
+        </form>
+    </div>
+</main>
+
+</body>
+</html>

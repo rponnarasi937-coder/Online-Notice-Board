@@ -1,0 +1,7 @@
+<!DOCTYPE html><html xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Login - Notice Board</title><link rel="stylesheet" th:href="@{/style.css}"></head>
+<body class="login-body"><header><div class="brand">📌 Campus Notice Board</div><nav><a href="/">Home</a></nav></header>
+<main class="login-wrap"><div class="login-card"><div class="login-symbol">🔐</div><p class="eyebrow">WELCOME BACK</p><h1>Sign in</h1><p class="muted">Login to access your campus notice board.</p>
+<p class="error" th:if="${error}" th:text="${error}"></p><form method="post" action="/login" class="login-form">
+<label>Username</label><input name="username" required placeholder="Enter username">
+<label>Password</label><input name="password" type="password" required placeholder="Enter password"><button class="button full">Login</button></form>
+<div class="demo"><b>Demo accounts</b><br>Admin: admin / admin123<br>Faculty: faculty / faculty123<br>Student: student / student123</div></div></main></body></html>
