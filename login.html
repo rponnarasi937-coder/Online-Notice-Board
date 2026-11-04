@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login - Campus Notice Board</title>
+<style>
+*{box-sizing:border-box}
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f5f6fc;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+.login-box{
+    background:white;
+    width:380px;
+    max-width:90%;
+    padding:35px;
+    border-radius:18px;
+    box-shadow:0 5px 25px #ddd;
+}
+h2{text-align:center;color:#20336b}
+p{text-align:center;color:#777}
+label{display:block;margin-top:18px}
+input,select{
+    width:100%;
+    padding:13px;
+    margin-top:8px;
+    border:1px solid #ddd;
+    border-radius:8px;
+}
+button{
+    width:100%;
+    padding:14px;
+    margin-top:25px;
+    background:#3155dc;
+    color:white;
+    border:0;
+    border-radius:8px;
+    font-weight:bold;
+    cursor:pointer;
+}
+a{display:block;text-align:center;margin-top:20px;color:#3155dc}
+#message{text-align:center;color:red}
+</style>
+</head>
+<body>
+
+<div class="login-box">
+    <h2>📌 Campus Notice Board</h2>
+    <p>Login to continue</p>
+
+    <form onsubmit="login(event)">
+        <label>User Role</label>
+        <select id="role">
+            <option value="Admin">Admin</option>
+            <option value="Faculty">Faculty</option>
+            <option value="Student">Student</option>
+        </select>
+
+        <label>Username</label>
+        <input type="text" id="username" placeholder="Enter username" required>
+
+        <label>Password</label>
+        <input type="password" id="password" placeholder="Enter password" required>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <p id="message"></p>
+    <a href="index.html">Back to Home</a>
+</div>
+
+<script>
+function login(event){
+    event.preventDefault();
+
+    const role=document.getElementById("role").value;
+    const username=document.getElementById("username").value;
+    const password=document.getElementById("password").value;
+
+    if(username.trim()!=="" && password.trim()!==""){
+        alert(role+" Login Successful! (Demo only)");
+        window.location.href="index.html";
+    }
+}
+</script>
+
+</body>
+</html>
